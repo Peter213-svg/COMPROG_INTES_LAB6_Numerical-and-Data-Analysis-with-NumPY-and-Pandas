@@ -1,0 +1,219 @@
+# NUMPY AND PANDAS LAB ACTIVITY
+# Student Information
+
+import numpy as np
+import pandas as pd
+
+STUDENT_NAME = "Peter"
+STUDENT_ID = "TUPM-25-3826"
+SEED = 3826
+
+np.random.seed(SEED)
+
+print("\n--- 1 ---")
+data = np.random.randint(1, SEED % 100 + 50, size=10)
+print(f"{STUDENT_NAME}'s Array:", data)
+
+mean_val = np.mean(data)
+std_val = np.std(data)
+print("Mean:", mean_val, "Std Dev:", std_val)
+
+
+print("\n--- 2 ---")
+matrix = np.random.randint(1, SEED % 50 + 20, size=(3,4))
+print(f"{STUDENT_NAME}'s Matrix:\n", matrix)
+
+row_sums = np.sum(matrix, axis=1)
+col_sums = np.sum(matrix, axis=0)
+
+print("Row sums:", row_sums)
+print("Column sums:", col_sums)
+
+
+print("\n--- 3 ---")
+arr3d = np.random.randint(0, SEED % 20 + 10, size=(3,3,3))
+print(f"{STUDENT_NAME}'s 3D Array:\n", arr3d)
+
+slice_mid = arr3d[:,1,:]
+print("Slice[:,1,:]:\n", slice_mid)
+
+
+print("\n--- 4 ---")
+x = np.random.randint(1, SEED % 100 + 50, size=10)
+
+filtered = x[(x > SEED % 50) & (x < SEED % 100)]
+
+print(f"{STUDENT_NAME}'s Original:", x)
+print("Filtered subset:", filtered)
+
+
+print("\n--- 5 ---")
+A = np.random.randint(1, SEED % 50 + 20, size=(2,2))
+B = np.random.randint(1, SEED % 50 + 20, size=(2,2))
+
+print("Matrix A:\n", A)
+print("Matrix B:\n", B)
+
+product = A @ B
+det_A = np.linalg.det(A)
+
+print("A @ B:\n", product)
+print("Determinant of A:", det_A)
+
+
+print("\n--- 6 ---")
+angles = np.linspace(0, 2*np.pi, 8)
+
+sine_vals = np.sin(angles)
+cos_vals = np.cos(angles)
+
+print(f"{STUDENT_NAME}'s Angles:", angles)
+print("Sine:", sine_vals)
+print("Cosine:", cos_vals)
+
+
+print("\n--- 7 ---")
+arr = np.random.randint(1, SEED % 50 + 20, size=(4,4))
+arr[::2, ::2] = 0
+
+print(f"{STUDENT_NAME}'s Modified 4x4 Array:\n", arr)
+
+
+print("\n--- 8 ---")
+scores = np.random.randint(0, SEED % 100 + 50, 10)
+
+grades = np.where(scores >= SEED % 70, 'Pass', 'Fail')
+
+print(f"{STUDENT_NAME}'s Scores:", scores)
+print("Grades:", grades)
+
+
+print("\n--- 9 ---")
+arr = np.random.randint(1, SEED % 50 + 20, size=(3,4))
+
+flat_arr = arr.flatten()
+transposed_arr = arr.T
+
+print("Original array:\n", arr)
+print("Flattened:", flat_arr)
+print("Transposed:\n", transposed_arr)
+
+
+print("\n--- 10 ---")
+arr = np.random.randint(1, SEED % 50 + 20, (3,3))
+
+mask = arr % 2 == 0
+arr[mask] = -1
+
+print("Array with conditional replacements:\n", arr)
+
+
+print("\n--- 11 ---")
+df = pd.DataFrame({
+    'Name':[STUDENT_NAME]*5,
+    'Score':np.random.randint(SEED%50, SEED%100+50,5),
+    'YearsCodePro':np.random.randint(0, SEED%20+10,5)
+})
+
+print(df)
+
+
+print("\n--- 12 ---")
+df = pd.DataFrame({
+    'EdLevel':['Bachelor','Master','PhD','Bachelor','Master'],
+    'ConvertedComp':np.random.randint(40000,150000,5)
+})
+
+avg_salary = df.groupby('EdLevel')['ConvertedComp'].mean()
+
+print(avg_salary)
+
+
+print("\n--- 13 ---")
+df = pd.DataFrame({
+    'Country':['Philippines','USA','UK','Canada','Germany'],
+    'ConvertedComp':np.random.randint(40000,150000,5)
+})
+
+top5 = df.sort_values(by='ConvertedComp',ascending=False)
+
+print(top5)
+
+
+print("\n--- 14 ---")
+df = pd.DataFrame({
+    'Name':[STUDENT_NAME]*5,
+    'YearsCodePro':np.random.randint(0, SEED%20+10,5)
+})
+
+high_exp = df[df['YearsCodePro'] > SEED%10]
+
+print(high_exp)
+
+
+print("\n--- 15 ---")
+df = pd.DataFrame({
+    'ConvertedComp':np.random.randint(40000,150000,5)
+})
+
+bins = [0,50000,100000,150000,200000]
+labels = ['0-50k','50-100k','100-150k','>150k']
+
+df['Bracket'] = pd.cut(df['ConvertedComp'], bins=bins, labels=labels)
+
+print(df)
+
+
+print("\n--- 16 ---")
+df = pd.DataFrame({
+    'ConvertedComp':np.random.randint(40000,150000,5)
+})
+
+df['LogComp'] = np.log(df['ConvertedComp'])
+
+print(df)
+
+
+print("\n--- 17 ---")
+df = pd.DataFrame({
+    'YearsCodePro':np.random.randint(0, SEED%20+10,5),
+    'ConvertedComp':np.random.randint(40000,150000,5)
+})
+
+corr_matrix = df.corr()
+
+print(corr_matrix)
+
+
+print("\n--- 18 ---")
+df = pd.DataFrame({
+    'EdLevel':['Bachelor','Master','PhD','Bachelor','Master'],
+    'ConvertedComp':np.random.randint(40000,150000,5)
+})
+
+summary = df.groupby('EdLevel')['ConvertedComp'].agg(['mean','median','std']).reset_index()
+
+print(summary)
+
+
+print("\n--- 19 ---")
+df = pd.DataFrame({
+    'ConvertedComp':np.random.randint(40000,150000,5)
+})
+
+threshold = 110000
+
+df['HighPay'] = np.where(df['ConvertedComp'] > threshold, 'Yes', 'No')
+
+print(df)
+
+
+print("\n--- 20 ---")
+df = pd.DataFrame({
+    'Country':['Philippines','USA','UK','Canada','Germany'],
+    'ConvertedComp':np.random.randint(40000,150000,5)
+})
+
+top_countries = df.groupby('Country')['ConvertedComp'].agg(['mean','max'])
+
+print(top_countries)
