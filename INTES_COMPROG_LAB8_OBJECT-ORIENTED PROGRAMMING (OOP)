@@ -1,0 +1,146 @@
+class Car:
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+
+    def display_info(self):
+        return f"{self.year} {self.brand} {self.model}"
+
+
+my_car = Car("Toyota", "Corolla", 2022)
+print(my_car.display_info())
+
+class BankAccount:
+    def __init__(self, account_holder, balance):
+        self.account_holder = account_holder
+        self.__balance = balance
+
+    def deposit(self, amount):
+        self.__balance += amount
+        return f"New balance: ${self.__balance}"
+
+    def get_balance(self):
+        return f"Balance: ${self.__balance}"
+
+
+account = BankAccount("Alice", 5000)
+print(account.deposit(1500))
+print(account.get_balance())
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def introduce(self):
+        return f"Hi, I'm {self.name}."
+
+
+class Student(Person):
+    def introduce(self):
+        return f"Hi, I'm {self.name}, and I'm a student."
+
+
+person = Person("Peter")
+student = Student("John")
+
+print(person.introduce())
+print(student.introduce())
+
+class Shape:
+    def area(self):
+        return "Calculating area..."
+
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return 3.14 * self.radius * self.radius
+
+
+class Rectangle(Shape):
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+
+
+circle = Circle(5)
+rectangle = Rectangle(4, 6)
+
+print(f"Circle area: {circle.area()}")
+print(f"Rectangle area: {rectangle.area()}")
+
+import datetime
+
+current_time = datetime.datetime.now()
+print("Current Date and Time:", current_time.strftime("%Y-%m-%d %H:%M:%S"))
+
+class MathOperations:
+    @staticmethod
+    def square(num):
+        return num * num
+
+
+user_input = int(input("Enter a number to square: "))
+result = MathOperations.square(user_input)
+
+print("Square of", user_input, ":", result)
+
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def __add__(self, other):
+        return BankAccount(self.balance + other.balance)
+
+
+account1 = BankAccount(5000)
+account2 = BankAccount(3000)
+
+total_balance = account1 + account2
+print(f"Total Balance: P{total_balance.balance}")
+
+from abc import ABC, abstractmethod
+
+class Appliance(ABC):
+    @abstractmethod
+    def turn_on(self):
+        pass
+
+
+class WashingMachine(Appliance):
+    def turn_on(self):
+        return "Washing machine is now running."
+
+
+wm = WashingMachine()
+print(wm.turn_on())
+
+
+class A:
+    def show(self):
+        return "Class A"
+
+
+class B(A):
+    def show(self):
+        return "Class B"
+
+
+class C(A):
+    def show(self):
+        return "Class C"
+
+
+class D(B, C):
+    pass
+
+
+obj = D()
+print(obj.show())
+print(D.mro())
